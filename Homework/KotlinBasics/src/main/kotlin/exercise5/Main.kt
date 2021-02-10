@@ -32,6 +32,9 @@ fun main() {
             print(" ${it.value} ")
     }.also { print("\n") }
 
+    //3 after feedback
+    println("Heart rates above 100: ${data.mapNotNull { it.takeIf { it.value > 100 }?.value }}")
+
     //4 & 5
     data.groupBy { it.date }.forEach { mapEntry ->
         println("The hearth rate values on the date ${mapEntry.key} are")
