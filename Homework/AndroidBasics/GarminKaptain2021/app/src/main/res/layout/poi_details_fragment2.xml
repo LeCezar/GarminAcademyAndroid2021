@@ -28,16 +28,18 @@
         app:layout_constraintTop_toBottomOf="@+id/poi_name_view"
         tools:text="Bridge" />
 
-    <TextView
+    <RatingBar
         android:id="@+id/poi_rating_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:isIndicator="true"
         app:layout_constraintEnd_toStartOf="@+id/poi_num_reviews_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/poi_type_view"
-        tools:text="Rating: 5.0" />
+        app:layout_constraintTop_toTopOf="@+id/poi_num_reviews_view"
+        app:layout_constraintBottom_toBottomOf="@id/poi_num_reviews_view"
+        android:stepSize="0.1"
+        tools:rating="5" />
 
     <TextView
         android:id="@+id/poi_num_reviews_view"
