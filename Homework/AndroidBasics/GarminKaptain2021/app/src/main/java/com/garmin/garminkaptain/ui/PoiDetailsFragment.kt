@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.garmin.garminkaptain.R
 import com.garmin.garminkaptain.TAG
@@ -48,11 +49,14 @@ class PoiDetailsFragment : Fragment() {
                 findViewById<TextView>(R.id.poi_name_view).text = poi.name
                 findViewById<TextView>(R.id.poi_type_view).text = poi.poiType
                 findViewById<RatingBar>(R.id.poi_rating_view).rating =
-                    poi.reviewSummary.averageRating.toFloat()
+                    poi.reviewsSummary.averageRating.toFloat()
                 findViewById<TextView>(R.id.poi_num_reviews_view).text =
-                    getString(R.string.label_num_reviews, poi.reviewSummary.numberOfReviews)
+                    getString(R.string.label_num_reviews, poi.reviewsSummary.numberOfReviews)
                 findViewById<Button>(R.id.poi_view_reviews_button).isEnabled =
-                    poi.reviewSummary.numberOfReviews > 0
+                    poi.reviewsSummary.numberOfReviews > 0
+                findViewById<Button>(R.id.poi_view_reviews_button).setOnClickListener {
+                    findNavController().navigate(PoiDetailsFragmentDirections.actionPoiDetailsFragmentToPoiReviewsFragment(poiId))
+                }
             }
         }
     }

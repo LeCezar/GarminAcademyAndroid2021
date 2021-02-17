@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/poi_reviews_fragment_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_margin="@dimen/spacing_normal"
+        tools:text="Reviews for Point Bonita"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/poi_reviews_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/poi_review_item">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
