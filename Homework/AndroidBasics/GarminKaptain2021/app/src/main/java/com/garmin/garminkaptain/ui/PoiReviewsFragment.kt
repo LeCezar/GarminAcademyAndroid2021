@@ -22,7 +22,7 @@ class PoiReviewsFragment : Fragment(R.layout.poi_reviews_fragment) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = PoiReviewsFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }

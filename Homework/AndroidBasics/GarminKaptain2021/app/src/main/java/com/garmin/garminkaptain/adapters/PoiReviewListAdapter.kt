@@ -44,8 +44,6 @@ class PoiReviewListAdapter(private val reviewList: List<Review>) :
                 poiReviewDate.text = review.dateCreated.formatMmDdYy(binding.root.context)
                 poiReviewRating.rating = review.rating.toFloat()
             }
-
-
         }
     }
 }
