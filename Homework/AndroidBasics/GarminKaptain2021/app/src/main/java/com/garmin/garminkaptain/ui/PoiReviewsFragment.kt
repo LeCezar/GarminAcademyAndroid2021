@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.garmin.garminkaptain.R
 import com.garmin.garminkaptain.adapters.PoiReviewListAdapter
-import com.garmin.garminkaptain.data.poiList
+import com.garmin.garminkaptain.data.Review
 import com.garmin.garminkaptain.databinding.PoiReviewsFragmentBinding
+import com.garmin.garminkaptain.viewModel.PoiViewModel
 
 class PoiReviewsFragment : Fragment(R.layout.poi_reviews_fragment) {
 
+    private val poiViewModel: PoiViewModel by activityViewModels()
     private lateinit var binding: PoiReviewsFragmentBinding
     private val args: PoiReviewsFragmentArgs by navArgs()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,14 +30,22 @@ class PoiReviewsFragment : Fragment(R.layout.poi_reviews_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setUpRecyclerView()
+        poiViewModel.getPoi(args.poiId).observe(viewLifecycleOwner, {
+            binding.poiReviewsFragmentTitle.text = getString(R.string.label_reviews_screen_title, it.name)
+            giveItemsToRecyclerView(it.reviewsSummary.reviews)
+        })
+    }
 
-        val poi = poiList.find { it.id == args.poiId }
-        binding.poiReviewsFragmentTitle.text = getString(R.string.label_reviews_screen_title, poi?.name)
+    private fun setUpRecyclerView() {
         binding.poiReviewsList.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            adapter = PoiReviewListAdapter(poi?.reviewsSummary?.reviews ?: listOf())
-
+            adapter = PoiReviewListAdapter()
         }
+    }
+
+    private fun giveItemsToRecyclerView(items: List<Review>) {
+        (binding.poiReviewsList.adapter as PoiReviewListAdapter).submitList(items)
     }
 }

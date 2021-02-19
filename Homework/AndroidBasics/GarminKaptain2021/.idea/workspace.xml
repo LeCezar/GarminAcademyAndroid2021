@@ -9,21 +9,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d024facf-8ab3-4d6d-a7d9-39d29d77692a" name="Default Changelist" comment="Adds the part 2 of the GarminKaptain application from the course.">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/model/PoiRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/viewModel/PoiViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/Extensions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/Extensions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/adapters/PoiReviewListAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/adapters/PoiReviewListAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/ui/PoiDetailsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/ui/PoiDetailsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/ui/PoiListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/ui/PoiListFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/model/PoiRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/model/PoiRepository.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/ui/PoiMapFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/ui/PoiMapFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/ui/PoiReviewsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/ui/PoiReviewsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/viewModel/PoiViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/garmin/garminkaptain/viewModel/PoiViewModel.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,26 +179,26 @@
       <screen x="0" y="25" width="1440" height="819" />
     </state>
     <state x="101" y="25" key="CommitChangelistDialog2/0.25.1440.819@0.25.1440.819" timestamp="1613561361059" />
-    <state width="1398" height="244" key="GridCell.Tab.0.bottom" timestamp="1613727456984">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1398" height="208" key="GridCell.Tab.0.bottom" timestamp="1613731662497">
+      <screen x="0" y="25" width="1440" height="819" />
     </state>
     <state width="1398" height="244" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1613727456984" />
-    <state width="1398" height="209" key="GridCell.Tab.0.bottom/0.25.1440.819@0.25.1440.819" timestamp="1613569377671" />
-    <state width="1398" height="244" key="GridCell.Tab.0.center" timestamp="1613727456983">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1398" height="208" key="GridCell.Tab.0.bottom/0.25.1440.819@0.25.1440.819" timestamp="1613731662497" />
+    <state width="1398" height="208" key="GridCell.Tab.0.center" timestamp="1613731662496">
+      <screen x="0" y="25" width="1440" height="819" />
     </state>
     <state width="1398" height="244" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1613727456983" />
-    <state width="1398" height="209" key="GridCell.Tab.0.center/0.25.1440.819@0.25.1440.819" timestamp="1613569377670" />
-    <state width="1398" height="244" key="GridCell.Tab.0.left" timestamp="1613727456982">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1398" height="208" key="GridCell.Tab.0.center/0.25.1440.819@0.25.1440.819" timestamp="1613731662496" />
+    <state width="1398" height="208" key="GridCell.Tab.0.left" timestamp="1613731662495">
+      <screen x="0" y="25" width="1440" height="819" />
     </state>
     <state width="1398" height="244" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1613727456982" />
-    <state width="1398" height="209" key="GridCell.Tab.0.left/0.25.1440.819@0.25.1440.819" timestamp="1613569377669" />
-    <state width="1398" height="244" key="GridCell.Tab.0.right" timestamp="1613727456983">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1398" height="208" key="GridCell.Tab.0.left/0.25.1440.819@0.25.1440.819" timestamp="1613731662495" />
+    <state width="1398" height="208" key="GridCell.Tab.0.right" timestamp="1613731662497">
+      <screen x="0" y="25" width="1440" height="819" />
     </state>
     <state width="1398" height="244" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1613727456983" />
-    <state width="1398" height="209" key="GridCell.Tab.0.right/0.25.1440.819@0.25.1440.819" timestamp="1613569377670" />
+    <state width="1398" height="208" key="GridCell.Tab.0.right/0.25.1440.819@0.25.1440.819" timestamp="1613731662497" />
     <state x="229" y="70" key="SettingsEditor" timestamp="1613568708491">
       <screen x="0" y="25" width="1440" height="819" />
     </state>

@@ -2,14 +2,16 @@ package com.garmin.garminkaptain.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.garmin.garminkaptain.data.Review
 import com.garmin.garminkaptain.databinding.PoiReviewItemBinding
 import com.garmin.garminkaptain.formatMmDdYy
 
-class PoiReviewListAdapter(private val reviewList: List<Review>) :
-    RecyclerView.Adapter<PoiReviewListAdapter.PoiReviewListItemViewHolder>() {
+class PoiReviewListAdapter() :
+    ListAdapter<Review, PoiReviewListAdapter.PoiReviewListItemViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -21,12 +23,8 @@ class PoiReviewListAdapter(private val reviewList: List<Review>) :
     }
 
     override fun onBindViewHolder(holderReview: PoiReviewListItemViewHolder, position: Int) {
-        reviewList.getOrNull(position)?.let {
-            holderReview.bind(it)
-        }
+        holderReview.bind(getItem(position))
     }
-
-    override fun getItemCount(): Int = reviewList.size
 
     inner class PoiReviewListItemViewHolder(private val binding: PoiReviewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -44,6 +42,13 @@ class PoiReviewListAdapter(private val reviewList: List<Review>) :
                 poiReviewDate.text = review.dateCreated.formatMmDdYy(binding.root.context)
                 poiReviewRating.rating = review.rating.toFloat()
             }
+        }
+    }
+
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Review>() {
+            override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: Review, newItem: Review): Boolean = oldItem == newItem
         }
     }
 }

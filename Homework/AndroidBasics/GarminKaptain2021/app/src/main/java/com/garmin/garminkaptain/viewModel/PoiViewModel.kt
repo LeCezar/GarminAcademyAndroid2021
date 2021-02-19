@@ -27,6 +27,11 @@ class PoiViewModel : ViewModel() {
         return poiLiveData
     }
 
+    fun getPoiWithMatchingLatLong(lat: Double, long: Double): LiveData<PointOfInterest> {
+        loadPoiMatchingLatLong(lat, long)
+        return poiLiveData
+    }
+
     fun getPoiList(): LiveData<List<PointOfInterest>> {
         loadPoiList()
         return poiListLiveData
@@ -38,6 +43,10 @@ class PoiViewModel : ViewModel() {
 
     private fun loadPoi(id: Long) {
         poiLiveData.postValue(PoiRepository.getPoi(id))
+    }
+
+    private fun loadPoiMatchingLatLong(lat: Double, long: Double) {
+        poiLiveData.postValue(PoiRepository.getPoiMatchingLatLong(lat, long))
     }
 
     override fun onCleared() {

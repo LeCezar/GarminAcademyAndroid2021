@@ -2,11 +2,12 @@ package com.garmin.garminkaptain.ui
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.doOnLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.garmin.garminkaptain.R
-import com.garmin.garminkaptain.data.poiList
+import com.garmin.garminkaptain.data.PointOfInterest
+import com.garmin.garminkaptain.viewModel.PoiViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -17,30 +18,29 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class PoiMapFragment : Fragment(R.layout.poi_map_fragment), GoogleMap.OnInfoWindowClickListener {
 
-    private val pointsOfInterest = poiList
+    private val poiViewModel: PoiViewModel by activityViewModels()
     private lateinit var mapFragment: SupportMapFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mapFragment = childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
-        view.doOnLayout {
-            refreshMap()
+        poiViewModel.getPoiList().also {
+            it.observe(viewLifecycleOwner, {
+                refreshMap(it)
+            })
         }
     }
 
     override fun onInfoWindowClick(selectedMarker: Marker?) {
         selectedMarker?.let { marker ->
-            val poi = pointsOfInterest.find {
-                it.mapLocation.latitude == marker.position.latitude && it.mapLocation.longitude == marker.position.longitude
-            }
-            poi?.let {
-                findNavController().navigate(
+            poiViewModel.getPoiWithMatchingLatLong(marker.position.latitude, marker.position.longitude).observe(viewLifecycleOwner, {
+                findNavController(this).navigate(
                     PoiMapFragmentDirections.actionPoiMapFragmentToPoiDetailsFragment(it.id)
                 )
-            }
+            })
         }
     }
 
-    private fun refreshMap() {
+    private fun refreshMap(pointsOfInterest: List<PointOfInterest>) {
         mapFragment.getMapAsync { map ->
             map.setOnInfoWindowClickListener(this)
             val latLngBoundsBuilder = LatLngBounds.builder()
