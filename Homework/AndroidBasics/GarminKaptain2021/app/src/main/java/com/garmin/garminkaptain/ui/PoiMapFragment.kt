@@ -20,31 +20,35 @@ class PoiMapFragment : Fragment(R.layout.poi_map_fragment), GoogleMap.OnInfoWind
 
     private val poiViewModel: PoiViewModel by activityViewModels()
     private lateinit var mapFragment: SupportMapFragment
+    private var poiList: List<PointOfInterest> = listOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         mapFragment = childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
         poiViewModel.getPoiList().also {
-            it.observe(viewLifecycleOwner, {
-                refreshMap(it)
+            it.observe(viewLifecycleOwner, { list ->
+                poiList = list
+                refreshMap()
             })
         }
     }
 
     override fun onInfoWindowClick(selectedMarker: Marker?) {
         selectedMarker?.let { marker ->
-            poiViewModel.getPoiWithMatchingLatLong(marker.position.latitude, marker.position.longitude).observe(viewLifecycleOwner, {
+            poiList.find {
+                it.mapLocation.latitude == marker.position.latitude && it.mapLocation.longitude == marker.position.longitude
+            }?.also {
                 findNavController(this).navigate(
                     PoiMapFragmentDirections.actionPoiMapFragmentToPoiDetailsFragment(it.id)
                 )
-            })
+            }
         }
     }
 
-    private fun refreshMap(pointsOfInterest: List<PointOfInterest>) {
+    private fun refreshMap() {
         mapFragment.getMapAsync { map ->
             map.setOnInfoWindowClickListener(this)
             val latLngBoundsBuilder = LatLngBounds.builder()
-            pointsOfInterest.forEach { poi ->
+            poiList.forEach { poi ->
                 LatLng(poi.mapLocation.latitude, poi.mapLocation.longitude).also {
                     latLngBoundsBuilder.include(it)
                     map.addMarker(MarkerOptions().position(it).title(poi.name))
