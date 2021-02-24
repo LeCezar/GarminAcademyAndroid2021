@@ -1,12 +1,13 @@
 package com.garmin.garminkaptain.viewModel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.garmin.garminkaptain.TAG
 import com.garmin.garminkaptain.data.PointOfInterest
 import com.garmin.garminkaptain.model.PoiRepository
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+
 
 class PoiViewModel : ViewModel() {
 
@@ -18,36 +19,43 @@ class PoiViewModel : ViewModel() {
         MutableLiveData<List<PointOfInterest>>()
     }
 
-    private val poiLiveData: MutableLiveData<PointOfInterest> by lazy {
-        MutableLiveData<PointOfInterest>()
+    private val loadingLiveData: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
     }
 
-    fun getPoi(id: Long): LiveData<PointOfInterest> {
-        loadPoi(id)
-        return poiLiveData
+    fun getPoi(id: Long): LiveData<PointOfInterest?> = liveData {
+        loadingLiveData.postValue(true)
+        PoiRepository.getPoi(id).collect {
+            emit(it)
+            loadingLiveData.postValue(false)
+        }
     }
 
-    fun getPoiWithMatchingLatLong(lat: Double, long: Double): LiveData<PointOfInterest> {
-        loadPoiMatchingLatLong(lat, long)
-        return poiLiveData
-    }
+//    fun getPoiWithMatchingLatLong(lat: Double, long: Double): LiveData<PointOfInterest> {
+//        loadPoiMatchingLatLong(lat, long)
+//        return poiLiveData
+//    }
 
     fun getPoiList(): LiveData<List<PointOfInterest>> {
         loadPoiList()
         return poiListLiveData
     }
 
-    private fun loadPoiList() {
-        poiListLiveData.postValue(PoiRepository.getPoiList())
+    fun getLoading(): LiveData<Boolean> = loadingLiveData
+
+    fun loadPoiList() {
+        loadingLiveData.postValue(true)
+        viewModelScope.launch {
+            PoiRepository.getPoiList().collect {
+                poiListLiveData.postValue(it)
+                loadingLiveData.postValue(false)
+            }
+        }
     }
 
-    private fun loadPoi(id: Long) {
-        poiLiveData.postValue(PoiRepository.getPoi(id))
-    }
-
-    private fun loadPoiMatchingLatLong(lat: Double, long: Double) {
-        poiLiveData.postValue(PoiRepository.getPoiMatchingLatLong(lat, long))
-    }
+//    private fun loadPoiMatchingLatLong(lat: Double, long: Double) {
+//        poiLiveData.postValue(PoiRepository.getPoiMatchingLatLong(lat, long))
+//    }
 
     override fun onCleared() {
         super.onCleared()

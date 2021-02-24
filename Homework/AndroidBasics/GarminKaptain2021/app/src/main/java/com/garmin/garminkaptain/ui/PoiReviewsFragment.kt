@@ -3,6 +3,8 @@ package com.garmin.garminkaptain.ui
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -31,9 +33,17 @@ class PoiReviewsFragment : Fragment(R.layout.poi_reviews_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpRecyclerView()
+
+        poiViewModel.getLoading().observe(
+            viewLifecycleOwner,
+            {
+                binding.poiReviewsProgress.visibility = if (it) VISIBLE else GONE
+            })
+
         poiViewModel.getPoi(args.poiId).observe(viewLifecycleOwner, {
-            binding.poiReviewsFragmentTitle.text = getString(R.string.label_reviews_screen_title, it.name)
-            giveItemsToRecyclerView(it.reviewsSummary.reviews)
+            binding.poiReviewsGroup.visibility = VISIBLE
+            binding.poiReviewsFragmentTitle.text = getString(R.string.label_reviews_screen_title, it?.name)
+            giveItemsToRecyclerView(it?.reviewsSummary?.reviews ?: listOf())
         })
     }
 
